@@ -181,6 +181,42 @@ void loop() {
           Serial.println("sonar on");
         }
       }
+    } else if (commandType == 3) // buttons
+    {
+      byte value  = bleSerial.read();
+      switch (value) {
+        case 0:
+          speedLeft += 5;
+          if (speedLeft > 63) speedLeft = 63;
+          break;   
+        case 1:
+          speedLeft -= 5;
+          if (speedLeft < -63) speedLeft = 63;
+          break;  
+        case 2:
+          speedRight += 5;
+          if (speedRight > 63) speedRight = 63;
+          break;   
+        case 3:
+          speedRight -= 5;
+          if (speedRight < -63) speedRight = 63;
+          break; 
+        case 10:
+          speedLeft = 0;
+          speedRight = 0;
+          break;    
+        case 12:
+          useSonar = !useSonar;
+          break;   
+        case 13:
+          speedLeft = (speedLeft + speedRight) / 2;
+          speedRight = speedLeft;
+          break;  
+      }
+      changeSpeed = true;
+    } else if (commandType == 4) // wakeup
+    {
+      byte value  = bleSerial.read();
     }
   }
 
