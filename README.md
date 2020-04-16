@@ -7,4 +7,4 @@
 * Sonar Sensor: [Parallax Ping)))] (https://www.parallax.com/sites/default/files/downloads/28015-PING-Sensor-Product-Guide-v2.0.pdf)
 
 
-![Schematic][docs/WeynRover-Schematics.png]
+![Schematic](docs/WeynRover-Schematics.png)
