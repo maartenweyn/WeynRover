@@ -20,15 +20,12 @@
 #include <NewPing.h>
 
 #define SONAR_TRIGGER_PIN  12
-#define SONAR_ECHO_PIN     12 // Parallax Ping sensor is a 1 pin sonar
-#define SONAR_MAX_DISTANCE 200
+#define SONAR_ECHO_PIN     12   // Parallax Ping sensor is a 1 pin sonar
+#define SONAR_MAX_DISTANCE 300  // Max range of sensor (see datasheet)
 
 
 #define CHECK_SONAR_INTERVAL 50 // Every 50 ms we check the distance measured by the Sonar sensor
 #define DISTANCE_TO_CLOSE 10    // When we are closer then 10 cm we will stop
-
-
-
 
 static int speedLeft = 0;       // Speed left motor  (-63 to 63)
 static int speedRight = 0;      // Speed right motor (-63 to 63)
@@ -91,7 +88,7 @@ void loop() {
         pingTimer += CHECK_SONAR_INTERVAL; // set new timestamp when to measure
         
         int distance = sonar.ping_cm();
-        if (distance > 1) { // if range > max it  will give a range of 0, some errornous measurements of 1
+        if (distance > 1) { // if range > max it  will give a range of 0, minimum range is 2 cm
           toClose = distance < DISTANCE_TO_CLOSE; // if object it to close
           
           Serial.printf("Ping: %d cm: %d\n", distance, toClose);
