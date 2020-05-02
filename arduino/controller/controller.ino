@@ -23,6 +23,7 @@ boolean paired = false;
 unsigned long pingTimer = 0;
 
 
+// Connecto the the Rover BLESerial
 bool connectToserver (BLEAddress pAddress){
     
     BLEClient*  pClient  = BLEDevice::createClient();
@@ -55,6 +56,7 @@ bool connectToserver (BLEAddress pAddress){
     }
 }
 
+// Get the Address of the Rover
 class MyAdvertisedDeviceCallbacks: public BLEAdvertisedDeviceCallbacks 
 {
     void onResult(BLEAdvertisedDevice advertisedDevice) {
@@ -73,7 +75,8 @@ void setup() {
   for (int i = 0; i<NR_OF_BUTTONS; i++)
     pinMode(button_pins[i], INPUT_PULLUP);
 
-   
+
+  // Scan for the rover
   BLEDevice::init("");
   pBLEScan = BLEDevice::getScan(); //create new scan
   pBLEScan->setAdvertisedDeviceCallbacks(new MyAdvertisedDeviceCallbacks()); //Call the class that is defined above 
@@ -81,12 +84,14 @@ void setup() {
   pBLEScan->setInterval(100);
   pBLEScan->setWindow(100);  
   
-  while (!ble_loop()) {};
+  while (!ble_loop()) {}; // do not go to the andruino loop if not connected to the rover
 
+  // ping timer is used to send a heartbeat message to the rover
   pingTimer = millis() + SEND_PING_NTERVAL;
 }
 
 
+// Method to scan and find the rover's BLESerial
 bool ble_loop() {
   Server_BLE_Address = NULL;
   BLEScanResults foundDevices = pBLEScan->start(3); //Scan for 3 seconds to find the Fitness band 
@@ -124,10 +129,12 @@ bool ble_loop() {
 void loop() {
 
   static byte command[2] = {3, 0};
-  
+
+  // Check if buttons are pressed
   for (int i = 0; i<NR_OF_BUTTONS; i++) {    
     int state = digitalRead(button_pins[i]);
 
+    // If pressed send to BLE and delay the heartbeat
     if (!state && buttonState[i]) {
       Serial.print("Button ");
       Serial.print(button_ids[i]);
@@ -143,12 +150,13 @@ void loop() {
     buttonState[i] = state;
   }
 
-   if (millis() >= pingTimer) {
+  // if heartbeat interval ellapsed, send heartbeat
+  if (millis() >= pingTimer) {
        pingTimer += SEND_PING_NTERVAL;
        byte pingcommand[2] = {4, 0};
         
       pRemoteCharacteristic->writeValue(pingcommand, 2);
-   }
+  }
 
   delay(100);
 }
