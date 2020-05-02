@@ -106,6 +106,7 @@ void loop() {
   // byte 1: datatype
   //  - 1 == direction command in byte 2
   //  - 2 == options in byte 2 and 3 (e.g. sonar on/off 
+  //  - 3 == direct button id in byte 2
   if (bleSerial.available()) {
     byte commandType = bleSerial.read(); // read first byte
     Serial.printf("commandType: %d\n", commandType);
@@ -185,38 +186,38 @@ void loop() {
     {
       byte value  = bleSerial.read();
       switch (value) {
-        case 0:
+        case 0: // Button 0 - Left motor increase
           speedLeft += 5;
           if (speedLeft > 63) speedLeft = 63;
           break;   
-        case 1:
+        case 1:  // Button 1 - Left motor decrease
           speedLeft -= 5;
           if (speedLeft < -63) speedLeft = 63;
           break;  
-        case 2:
+        case 2:  // Button 2 - Right motor increase
           speedRight += 5;
-          if (speedRight > 63) speedRight = 63;
+          if (speedRight > 63) speedRight = -63;
           break;   
-        case 3:
+        case 3:  // Button 3 - Right motor decrease
           speedRight -= 5;
-          if (speedRight < -63) speedRight = 63;
+          if (speedRight < -63) speedRight = -63;
           break; 
-        case 10:
+        case 10:  // Button 10 - stop
           speedLeft = 0;
           speedRight = 0;
           break;    
-        case 12:
+        case 12:  // Button 12 - toggle Sonar
           useSonar = !useSonar;
           break;   
-        case 13:
+        case 13:   // Button 13 - go straight
           speedLeft = (speedLeft + speedRight) / 2;
           speedRight = speedLeft;
           break;  
       }
       changeSpeed = true;
-    } else if (commandType == 4) // wakeup
+    } else if (commandType == 4) // wakeup - regulart wakeup message to make sure controller is still active
     {
-      byte value  = bleSerial.read();
+      byte value  = bleSerial.read(); // not handled currently 
     }
   }
 
