@@ -8,4 +8,17 @@
 * MCU: [Adafruit HUZZAH32 - ESP32 Feather](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/overview)
 
 
+### Videos (dutch)
+
+* [Basic Rover platform](https://www.youtube.com/watch?v=q37EDivFVcY)
+* [Generic Rover controller](https://www.youtube.com/channel/UC2qKM1AdMYbieY8bGxWW5Ew)
+
+## Schematics
+
+### Rover
+
 ![Schematic](docs/WeynRover-Schematics.png)
+
+### Controller
+
+![Schematic](docs/schematic-controller.png)
