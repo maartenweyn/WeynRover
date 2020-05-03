@@ -11,7 +11,7 @@
 ### Videos (dutch)
 
 * [Basic Rover platform](https://www.youtube.com/watch?v=q37EDivFVcY)
-* [Generic Rover controller](https://www.youtube.com/channel/UC2qKM1AdMYbieY8bGxWW5Ew)
+* [Generic Rover controller](https://youtu.be/8a1gSWUQ1Mc)
 
 ## Schematics
 
