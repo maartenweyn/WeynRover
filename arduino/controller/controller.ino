@@ -1,3 +1,20 @@
+    
+/*
+  WeynRover Controller
+  
+  Basic control software a generic controller with buttons
+
+  The circuit:
+  * all pins in button_pins are connected to a buttons which are connected to the ground through a resistor
+
+  April 2020
+  Maarten Weyn - Weyn.Tech
+
+  https://github.com/maartenweyn/WeynRover
+
+*/
+
+
 #include <BLEDevice.h> 
 
 #define NR_OF_BUTTONS 8

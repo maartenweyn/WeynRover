@@ -9,7 +9,7 @@
   * IO15 (=UART2 TX): S1 of Sabertooth 2x12 motor driver
 
   April 2020
-  BMaarten Weyn - Weyn.Tech
+  Maarten Weyn - Weyn.Tech
 
   https://github.com/maartenweyn/WeynRover
 
