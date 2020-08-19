@@ -1,3 +1,4 @@
+```
 cordova platform add android
 cordova platform add ios
 
@@ -7,3 +8,5 @@ cordova-icon
 cordova-platform
 
 cordova build ios
+cordova build android
+```
